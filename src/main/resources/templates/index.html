@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet" href="style.css">
+<title>Meal Planner!</title>
+</head>
+<body>
+	<h1>Add your meal to the planner! (Work in Progress)</h1>
+<!-- 	//id, drink, mainDish, treat, dayOfWeek, description, inStock -->
+
+	<table th:if="${meal}!= null AND Meal != ''">
+		<tr>
+			<th>ID</th>
+			<th>Drink</th>
+			<th>Main</th>
+			<th>Treat</th>
+			<th>Day</th>
+			<th>Description</th>
+			<th>In Stock</th>
+			<th>Edit</th>
+			<th>Delete</th>
+		</tr>
+		<tr th:each= "s : ${mealList}">
+			<td th:text="${s.id}"></td>
+			<td th:text="${s.drink}"></td>
+			<td th:text="${s.mainDish}"></td>
+			<td th:text="${s.treat}"></td>
+			<td th:text="${s.dayOfWeek}"></td>
+			<td th:text="${s.description}"></td>
+			<td th:text="${s.inStock}"></td>
+			<td><a th:href="@{/editMealById/}+${s.id}">Edit</a></td>
+			<td><a th:href="@{/deleteMealById/}+${s.id}">Delete</a></td>
+		</tr>
+	</table>
+
+	<hr>
+	
+	<form method="post" th:action="@{/insertMeal}" th:object="${meal}">
+		<label>***Some pages are still a work in progress***</label><br>
+		<input type="hidden" name="id" th:field="*{id}"/>
+		<label>Drink: </label><input type="text" name="drink" th:field="*{drink}"/> <br>
+		<label>Main Dish: </label><input type="text" name="mainDish" th:field="*{mainDish}"/><br>
+		<label>Treat: </label><input type="text" name="treat" th:field="*{treat}"/><br>
+		<label>Day Of Week: </label><input type="text" name="dayOfWeek" th:field="*{dayOfWeek}"/><br>
+		<label>Description: </label><input type="text" name="description" th:field="*{description}" /><br>
+		<label>In Stock: </label><input type="checkbox" name="inStock" th:checked="${meal.inStock}"/><br>
+		<input type="submit" value="Add Meal!" id="btn"/>
+	</form>
+	
+	<a href="/shopping"><button id="btn2">Check Shopping List!</button></a>
+
+
+</body>
+</html>

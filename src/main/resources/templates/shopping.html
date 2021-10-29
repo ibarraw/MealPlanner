@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Shopping Midterm Page</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<h1>Displaying meals needed to buy</h1>
+<!-- 	//id, drink, mainDish, treat, dayOfWeek, description, inStock -->
+	<table th:if="${meal}!= null AND Meal != ''">
+		<tr>
+			<th>ID</th>
+			<th>Drink</th>
+			<th>Main</th>
+			<th>Treat</th>
+			<th>Day</th>
+			<th>Description</th>
+			<th>In Stock</th>
+			<th>Edit</th>
+			<th>Delete</th>
+		</tr>
+		<tr th:each= "s : ${mealList}">
+		<div th:if="${s.inStock} == 'No'"> <!-- if inStock is False, print table -->
+			<td th:text="${s.id}"></td>
+			<td th:text="${s.drink}"></td>
+			<td th:text="${s.mainDish}"></td>
+			<td th:text="${s.treat}"></td>
+			<td th:text="${s.dayOfWeek}"></td>
+			<td th:text="${s.description}"></td>
+			<td th:text="${s.inStock}"></td>
+			<td><a th:href="@{/editMealById/}+${s.id}">Edit</a></td>
+			<td><a th:href="@{/deleteMealById/}+${s.id}">Delete</a></td>
+		</div>
+		</tr>
+	</table>
+	
+	<a href="/"><button id="btn2">Go Back!</button></a>
+	
+</body>
+</html>
